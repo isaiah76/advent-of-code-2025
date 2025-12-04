@@ -1,0 +1,10 @@
+*.iml
+.idea/
+out/
+bin/
+target/
+build/
+.DS_Store
+Thumbs.db
+*.log
+
