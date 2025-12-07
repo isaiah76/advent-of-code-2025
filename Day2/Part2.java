@@ -4,25 +4,24 @@ void main() throws IOException {
     for (var s : input) {
         var num = s.split("-");
         for (long i = Long.parseLong(num[0]); i <= Long.parseLong(num[1]); i++) {
-            if (isRepeating(i)) sum += i;
+            String str = Long.toString(i);
+            boolean repeating = false;
+            for (int p = 1; p <= str.length() / 2; p++) {
+                if (str.length() % p != 0) continue;
+                boolean match = true;
+                for (int k = p; k < str.length(); k++) {
+                    if (str.charAt(k) != str.charAt(k - p)) {
+                        match = false;
+                        break;
+                    }
+                }
+                if (match) {
+                    repeating = true;
+                    break;
+                }
+            }
+            if (repeating) sum += i;
         }
     }
     IO.print(sum);
-}
-
-boolean isRepeating(long num) {
-    String s = Long.toString(num);
-    int len = s.length();
-    for (int i = 1; i <= len / 2; i++) {
-        if (len % i != 0) continue;
-        boolean isMatch = true;
-        for (int k = i; k < len; k++) {
-            if (s.charAt(k) != s.charAt(k - i)) {
-                isMatch = false;
-                break;
-            }
-        }
-        if (isMatch) return true;
-    }
-    return false;
 }
